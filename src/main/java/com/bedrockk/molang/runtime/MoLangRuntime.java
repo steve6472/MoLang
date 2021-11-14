@@ -1,8 +1,6 @@
 package com.bedrockk.molang.runtime;
 
-import com.bedrockk.molang.ExprTraverser;
 import com.bedrockk.molang.Expression;
-import com.bedrockk.molang.visitor.ExprConnectingVisitor;
 import com.bedrockk.molang.runtime.struct.ArrayStruct;
 import com.bedrockk.molang.runtime.struct.ContextStruct;
 import com.bedrockk.molang.runtime.struct.VariableStruct;
@@ -30,10 +28,6 @@ public class MoLangRuntime {
     }
 
     public MoValue execute(List<Expression> expressions, Map<String, MoValue> context) {
-        var traverser = new ExprTraverser();
-        traverser.getVisitors().add(new ExprConnectingVisitor());
-        traverser.traverse(expressions);
-
         environment.getStructs().put("context", new ContextStruct(context));
 
         MoValue result = DoubleValue.ZERO;
