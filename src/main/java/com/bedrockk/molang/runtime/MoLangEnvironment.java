@@ -5,8 +5,6 @@ import com.bedrockk.molang.runtime.value.DoubleValue;
 import com.bedrockk.molang.runtime.value.MoValue;
 import lombok.Value;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -20,22 +18,30 @@ public class MoLangEnvironment implements MoValue {
     }
 
     public MoValue getValue(String name, MoParams params) {
-        LinkedList<String> segments = new LinkedList<>(Arrays.asList(name.split("\\.")));
-        String main = segments.poll();
+        int indexOfDot = name.indexOf('.');
+        String main;
+        if (indexOfDot == -1)
+            main = name;
+        else
+            main = name.substring(0, indexOfDot);
 
         if (structs.containsKey(main)) {
-            return structs.get(main).get(String.join(".", segments), params);
+            return structs.get(main).get(name.substring(indexOfDot + 1), params);
         }
 
         return new DoubleValue(0.0);
     }
 
     public void setValue(String name, MoValue value) {
-        LinkedList<String> segments = new LinkedList<>(Arrays.asList(name.split("\\.")));
-        String main = segments.poll();
+        int indexOfDot = name.indexOf('.');
+        String main;
+        if (indexOfDot == -1)
+            main = name;
+        else
+            main = name.substring(0, indexOfDot);
 
         if (structs.containsKey(main)) {
-            structs.get(main).set(String.join(".", segments), value);
+            structs.get(main).set(name.substring(indexOfDot + 1), value);
         }
     }
 
