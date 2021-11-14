@@ -1,13 +1,10 @@
 package com.bedrockk.molang;
 
-import com.bedrockk.molang.parser.MoLangParser;
-import com.bedrockk.molang.runtime.MoLangRuntime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 @DisplayName("Evaluator Test")
 public class EvaluatorTest {
@@ -27,7 +24,7 @@ public class EvaluatorTest {
 
     @Test
     public void testEval4() throws IOException {
-        eval("expr4.txt", (213 + 2 / 0.5 + 5 + 2 * 3) + 310.5 + (10 * Math.cos(270)) + 100);
+        eval("expr4.txt", (213 + 2 / 0.5 + 5 + 2 * 3) + 310.5 + (10 * Math.cos(Math.toRadians(270))) + 100);
     }
 
 }
