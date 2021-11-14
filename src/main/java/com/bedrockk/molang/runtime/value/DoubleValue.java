@@ -1,5 +1,7 @@
 package com.bedrockk.molang.runtime.value;
 
+import java.util.Objects;
+
 public class DoubleValue implements MoValue {
 
     public final static DoubleValue ZERO = new DoubleValue(0.0);
@@ -18,6 +20,23 @@ public class DoubleValue implements MoValue {
     }
 
     @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        DoubleValue that = (DoubleValue) o;
+        return Double.compare(that.value, value) == 0;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(value);
+    }
+
+    @Override
     public Double value() {
         return value;
     }
@@ -30,5 +49,11 @@ public class DoubleValue implements MoValue {
     @Override
     public double asDouble() {
         return value;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "DoubleValue{" + "value=" + value + '}';
     }
 }

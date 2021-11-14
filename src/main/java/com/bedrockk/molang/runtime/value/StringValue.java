@@ -17,4 +17,10 @@ public class StringValue implements MoValue {
     public String asString() {
         return value;
     }
+
+    @Override
+    public String toString()
+    {
+        return "StringValue{" + "value='" + value + '\'' + '}';
+    }
 }

@@ -12,4 +12,10 @@ abstract public class BinaryOpExpression implements Expression {
     protected final Expression right;
 
     public abstract String getSigil();
+
+    @Override
+    public String toString()
+    {
+        return "BinaryOpExpression{" + left + getSigil() + right + '}';
+    }
 }
